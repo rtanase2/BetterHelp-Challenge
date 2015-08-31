@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  root 'survey#new'
+  resources :survey 
+  resources :question
+  get '/survey/results' => 'survey#results'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
