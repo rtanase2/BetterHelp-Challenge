@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Questions</title>
+</head>
+<body>
+    <h1>Edit Questions</h1>
+    <% for q in @questions %>
+        <p>Question: <%= q.question %> <a href=<%= "question/" << raw(q.id) << "/edit" %>><button input="button">Edit</button><a></p>
+
+    <% end %>
+</body>
+</html>

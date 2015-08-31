@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Question</title>
+</head>
+
+<body>
+    <%= form_for :question do |f| %>
+        <p>
+            <%= f.label "Question: " %>
+            <%= f.text_field :question %>
+        </p>
+
+        <p>
+            <%= f.sumbit "Change Question" %>
+        </p>
+
+    <% end %>
+</body>
+</html>

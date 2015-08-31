@@ -3,21 +3,15 @@ class SurveyController < ApplicationController
         @surveys = Survey.all
     end
 
-    def new
-        @survey = Survey.new
+    def edit
+        @survey = Survey.find(params[:id])
     end
 
-    def create
-        @survey = Survey.new(survey_params)
-        if @survey.save
-            redirect_to '/survey'
-        else
-            redner 'new'
-        end
+    def update
     end
     
     private
         def survey_params
-            params.require(:survey).permit(:keywords_required)
+            params.require(:survey).permit(:name, :questions)
         end
 end
