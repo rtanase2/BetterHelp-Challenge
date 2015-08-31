@@ -5,14 +5,14 @@
 </head>
 
 <body>
-    <%= form_for :question do |f| %>
+    <%= form_for :question, :url =>  "/survey/" << params[:survey_id] << "/question/" << raw(params[:id]), :html => {:method => :patch} do |f| %>
         <p>
             <%= f.label "Question: " %>
             <%= f.text_field :question %>
         </p>
 
         <p>
-            <%= f.sumbit "Change Question" %>
+            <%= f.submit "Save Changes" %>
         </p>
 
     <% end %>

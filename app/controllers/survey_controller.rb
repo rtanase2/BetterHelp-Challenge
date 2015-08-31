@@ -7,6 +7,14 @@ class SurveyController < ApplicationController
         @survey = Survey.find(params[:id])
     end
 
+    def show
+        if params[:id] == nil
+            params[:id] = 1
+        end
+        @survey = Survey.find(params[:id])
+        @questions = Question.where(:survey_id => params[:id])
+    end
+
     def update
     end
     

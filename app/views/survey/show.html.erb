@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= @survey.name %></title>
+</head>
+<body>
+    <h1> <%= @survey.name %></h1>
+    <%= @questions.each do |q| %>
+        <h3> <%= q.question %> </h3>
+    <% end %>
+</body>
+</html>
