@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Answer</title>
+</head>
+<body>
+    <h1>Add New Answer</h1>
+    <%= form_for :answer, :url =>  "/survey/" << params[:survey_id] << "/question/" << params[:question_id] << "/answer" do |f| %>
+        <p>
+            <%= f.label "What answer would you like to add?" %>
+            <%= f.text_field :option %>
+        </p>
+
+        <%= f.submit "Add Answer" %> </br> </br>
+        <a href= <%= "/survey/" << params[:survey_id] << "/question/" << params[:question_id] << "/answer" %>><button input="button">Back</button></a>
+    <% end %>
+</body>
+</html>

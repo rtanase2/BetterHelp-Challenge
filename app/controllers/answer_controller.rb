@@ -9,9 +9,11 @@ class AnswerController < ApplicationController
 
     def create
         @answer = Answer.new(answer_params)
-        @answer.postion = Answer.where(:question_id => params[:question_id]).count + 1
+        @answer.position = Answer.where(:question_id => params[:question_id]).count + 1
+        @answer.survey_id = params[:survey_id]
+        @answer.question_id = params[:question_id]
         if @answer.save
-            reditect_to ''
+            redirect_to '/survey/' << params[:survey_id] << "/question/" << params[:question_id] << "/answer"
         else
             render 'new'
         end
