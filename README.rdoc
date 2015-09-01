@@ -1,8 +1,8 @@
-== README
+== Description
 
 Survey app built for BetterHelp's technical challenge. Allows user take a survey and display the most common answer per gender as well as allowing editting of questions and answers.
 
-=== Features
+== Features
 
 * Adding questions
 * Deleting questions
