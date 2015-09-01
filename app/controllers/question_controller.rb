@@ -14,6 +14,7 @@ class QuestionController < ApplicationController
     def create
         @question = Question.new(question_params)
         @question.survey_id = params[:survey_id]
+        @question.position = Question.where(:survey_id => params[:survey_id]).count + 1
         if @question.save
             redirect_to '/survey/' << params[:survey_id] <<'/question'
         else

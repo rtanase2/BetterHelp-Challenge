@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Answer</title>
+</head>
+
+<body>
+    <%= form_for :answer, :url =>  "/survey/" << params[:survey_id] << "/question/" << raw(params[:question_id]) << "/answer/" << raw(params[:id]), :html => {:method => :patch} do |f| %>
+        <p>
+            <%= f.label "Answer: " %>
+            <%= f.text_field :option %>
+        </p>
+
+        <p>
+            <%= f.submit "Save Changes" %>
+        </p>
+
+    <% end %>
+
+    <a href=<%= "/survey/" << params[:survey_id] << "/question/" << params[:question_id] %>><button input="button">Back</button></a>
+</body>
+</html>
