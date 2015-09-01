@@ -4,6 +4,7 @@ class CreateSubmissionQuestionAnswers < ActiveRecord::Migration
       t.references :question
       t.references :answer
       t.references :submission
+      t.references :survey
       t.timestamps null: false
     end
   end
