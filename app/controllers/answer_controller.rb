@@ -28,4 +28,5 @@ class AnswerController < ApplicationController
     private
     def answer_params
         params.require(:answer).permit(:option)
+    end
 end

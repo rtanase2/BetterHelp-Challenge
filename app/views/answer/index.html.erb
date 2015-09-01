@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head></head>
-<body></body>
+<head>
+    <title>Edit Answers</title>
+</head>
+<body>
+    <% for a in @answers %>
+        <p><%= a.option %></p>
+    <% end %>
+</body>
 </html>
