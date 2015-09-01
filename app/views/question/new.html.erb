@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Question</title>
+</head>
+<body>
+    <h1>Add New Question <a href= <%= "/survey/" << params[:survey_id] << "/question" %>><button input="button">Back</button></a></h1>
+    <%= form_for :question, :url =>  "/survey/" << params[:survey_id] << "/question/" do |f| %>
+        <p>
+            <%= f.label "What question would you like to add?" %>
+            <%= f.text_field :question %>
+        </p>
+        <p>
+            <%= f.label "What type of input would you like it to be?"%></br>
+            <%= radio_button_tag(:type_input, "radio") %>
+            <%= label_tag(:type_input, "Radio Buttons") %></br>
+            <%= radio_button_tag(:type_input, "check") %>
+            <%= label_tag(:type_input, "Check Boxes") %>
+        </p>
+
+        <%= f.submit "Add Question!" %>
+    <% end %>
+</body>
+</html>
