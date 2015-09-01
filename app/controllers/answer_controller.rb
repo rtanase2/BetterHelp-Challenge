@@ -29,6 +29,9 @@ class AnswerController < ApplicationController
     end
 
     def destroy
+        @answer = Answer.find(params[:id])
+        @answer.destroy
+        redirect_to "/survey/" << params[:survey_id] << "/question/" << params[:question_id] << "/answer"
     end
 
     def edit

@@ -8,7 +8,9 @@
     <a href=<%= "/survey/" << params[:survey_id] << "/question/" << params[:question_id] << "/answer/new" %>><button input="button">Add New Answer</button></a>
     <a href=<%= "/survey/" << params[:survey_id] << "/question" %>><button input="button">Back</button></a></h1>
     <% for a in @answers %>
-        <p><%= raw(a.position) << ". " << a.option %> <a href= <%= "/survey/" << raw(params[:survey_id]) << "/question/" << raw(params[:question_id]) << "/answer/" << raw(a.id) << "/edit" %>><button input="button"> Edit </button></a></p>
+        <p><%= raw(a.position) << ". " << a.option %></p>
+         <a href= <%= "/survey/" << raw(params[:survey_id]) << "/question/" << raw(params[:question_id]) << "/answer/" << raw(a.id) << "/edit" %>><button input="button"> Edit </button></a>  </br></br>
+            <%= button_to "Delete Answer", {controller => :answer, action: "destroy", id: raw(a.id)}, :method => :delete %>
     <% end %>
     
 </body>
