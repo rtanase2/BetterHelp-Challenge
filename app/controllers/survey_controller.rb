@@ -13,6 +13,20 @@ class SurveyController < ApplicationController
         end
         @survey = Survey.find(params[:id])
         @questions = Question.where(:survey_id => params[:id])
+        @answers = Answer.where(:survey_id => params[:id])
+    end
+
+    def new
+        @submission = Submission.new
+    end
+
+    def create
+        @submission = Submission.new(submission_params)
+        if @submission.save
+            redirect_to
+        else
+            render 'new'
+        end
     end
 
     def update

@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150831190923) do
+ActiveRecord::Schema.define(version: 20150831224314) do
 
   create_table "answers", force: :cascade do |t|
     t.string  "option"
-    t.string  "value"
     t.integer "question_id"
     t.integer "survey_id"
   end
@@ -31,13 +30,26 @@ ActiveRecord::Schema.define(version: 20150831190923) do
   create_table "questions", force: :cascade do |t|
     t.string   "question"
     t.string   "input_type"
-    t.integer  "answers_id"
     t.integer  "survey_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "questions", ["survey_id"], name: "index_questions_on_survey_id"
+
+  create_table "submission_question_answers", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "answer_id"
+    t.integer  "submission_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.integer  "survey_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "survey_questions", force: :cascade do |t|
     t.integer "surveys_id"
@@ -46,9 +58,8 @@ ActiveRecord::Schema.define(version: 20150831190923) do
 
   create_table "surveys", force: :cascade do |t|
     t.string   "name"
-    t.integer  "questions_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
