@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Surveys</title>
+</head>
+<body>
+    <h1>All Surveys</h1>
+    <% for s in @surveys %>
+        <p><%= s.name %> <a href= <%= "/survey/" << raw(s.id) << "/question" %>><button input="button">Edit</button></a>
+        <a href= <%= "/survey/" << raw(s.id) << "/submission/new" %>><button input="button">Take Survey</button></a></p>
+    <% end %>
+</body>
+</html>
