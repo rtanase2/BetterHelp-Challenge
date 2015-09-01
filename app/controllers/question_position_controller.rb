@@ -1,2 +1,0 @@
-class QuestionPositionController < ApplicationController
-end

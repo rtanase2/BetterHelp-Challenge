@@ -3,6 +3,7 @@ class CreateQuestions < ActiveRecord::Migration
     create_table :questions do |t|
         t.string :question
         t.string :input_type
+        t.int :position
         t.belongs_to :survey, index: true
         t.timestamps null:false
     end

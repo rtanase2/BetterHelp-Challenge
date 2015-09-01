@@ -1,2 +1,0 @@
-class AnswerPositionController < ApplicationController
-end
