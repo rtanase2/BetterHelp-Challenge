@@ -9,13 +9,15 @@
         <% for q in @questions %>
             <h3><%= "#{raw(q.position)}. #{q.question}" %></h3>
             <% for a in @answers.where(:question_id => q.id) %>
+            <%= f.fields_for :results do |r| %>
                 <p>
                 <% if q.input_type == "radio" %>
-                    <%= f.radio_button("survey_id", "hi") %>
+                    <%= r.radio_button(raw(q.id), a.option) %>
                 <% else %>
-                    <%= f.check_box("survey_id", {}, "hi", "hi") %>
+                    <%= r.check_box(raw(q.id), {:multiple => true}, a.option, nil) %>
                 <% end %>
-                 <%= f.label a.option %></p>
+                 <%= r.label a.option %></p>
+                 <% end %>
             <% end %>
         <% end %>
         <%= f.submit "Submit" %>

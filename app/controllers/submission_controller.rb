@@ -4,6 +4,7 @@ class SubmissionController < ApplicationController
         @survey = Survey.find(params[:survey_id])
         @questions = Question.where(:survey_id => params[:survey_id])
         @answers = Answer.where(:survey_id => params[:survey_id])
+        @submission.results ||= {} 
     end
 
     def create
@@ -17,7 +18,7 @@ class SubmissionController < ApplicationController
 
     private
     def submission_params
-        params.require(:submission).permit(:survey_id)
+        params.require(:submission).permit(:survey_id, :results)
     end
 
 end
