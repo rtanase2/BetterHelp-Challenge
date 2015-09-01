@@ -4,12 +4,13 @@
     <title>Edit Questions</title>
 </head>
 <body>
-    <h1>Edit Questions</h1>
+    <h1>Edit Questions <a href=<%= "/survey/" << params[:survey_id] << "/question/new"%>><button input="button">Add New Question</button></a>
+    <a href=<%= "/survey/" %>><button input="button">Back</button></a></h1>
     <% for q in @questions %>
-        <p>Question: <%= q.question %> <a href=<%= "/survey/" << params[:survey_id] << "/question/" << raw(q.id) << "/edit" %>><button input="button">Edit Question</button></a> 
-            <a href=<%= "/survey/" << params[:survey_id] << "/question/" << raw(q.id) << "/answer/" %>><button input="button">Edit answers</button></a></p>
+        <p>Question: <%= q.question %></p> 
+        <p><a href=<%= "/survey/" << params[:survey_id] << "/question/" << raw(q.id) << "/edit" %>><button input="button">Edit Question</button></a> </p>
+        <p><a href=<%= "/survey/" << params[:survey_id] << "/question/" << raw(q.id) << "/answer/" %>><button input="button">Edit answers</button></a></p>
+        <%= button_to "Delete Question", {controller => :question, action: "destroy", id: raw(q.id)}, :method => :delete %>
     <% end %>
-    <a href=<%= "/survey/" << params[:survey_id] << "/question/new"%>><button input="button">Add New Question</button></a>
-    <a href=<%= "/survey/" %>><button input="button">Back</button></a>
 </body>
 </html>

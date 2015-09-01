@@ -22,11 +22,6 @@ ActiveRecord::Schema.define(version: 20150831224314) do
   add_index "answers", ["question_id"], name: "index_answers_on_question_id"
   add_index "answers", ["survey_id"], name: "index_answers_on_survey_id"
 
-  create_table "question_answers", force: :cascade do |t|
-    t.integer "questions_id"
-    t.integer "answers_id"
-  end
-
   create_table "questions", force: :cascade do |t|
     t.string   "question"
     t.string   "input_type"
@@ -41,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150831224314) do
     t.integer  "question_id"
     t.integer  "answer_id"
     t.integer  "submission_id"
+    t.integer  "survey_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
@@ -49,11 +45,6 @@ ActiveRecord::Schema.define(version: 20150831224314) do
     t.integer  "survey_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "survey_questions", force: :cascade do |t|
-    t.integer "surveys_id"
-    t.integer "questions_id"
   end
 
   create_table "surveys", force: :cascade do |t|

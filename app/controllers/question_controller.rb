@@ -30,6 +30,12 @@ class QuestionController < ApplicationController
         end
     end
 
+    def destroy
+        @question = Question.find(params[:id])
+        @question.destroy
+        redirect_to "/survey/" << params[:survey_id] << "/question"
+    end
+
     private
     def question_params
         params.require(:question).permit(:question, :input_type, :survey_id)
