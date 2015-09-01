@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'survey#new'
   resources :survey do
-    resources :question, only: [:index, :edit, :update]
+    resources :question, only: [:index, :edit, :update] do
+      resources :answer
+    end
     resources :submission
   end
   # The priority is based upon order of creation: first created -> highest priority.
