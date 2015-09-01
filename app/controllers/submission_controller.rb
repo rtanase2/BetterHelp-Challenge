@@ -4,7 +4,6 @@ class SubmissionController < ApplicationController
         @survey = Survey.find(params[:survey_id])
         @questions = Question.where(:survey_id => params[:survey_id])
         @answers = Answer.where(:survey_id => params[:survey_id])
-        print @questions
     end
 
     def create

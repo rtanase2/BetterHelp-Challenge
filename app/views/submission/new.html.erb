@@ -5,13 +5,20 @@
 </head>
 <body>
     <h1> <%= @survey.name %></h1>
-    <% form_for :submission do |f| %>
-    <% for q in @questions %>
-        <%= f.label q.question %>
-        <% for a in @answers.where(:question_id => q.id) %>
-            <p> <%= f.label a.option %></p>
+    <%= form_for :submission do |f| %>
+        <% for q in @questions %>
+            <h3><%= "#{raw(q.position)}. #{q.question}" %></h3>
+            <% for a in @answers.where(:question_id => q.id) %>
+                <p>
+                <% if q.input_type == "radio" %>
+                    <%= f.radio_button("survey_id", "hi") %>
+                <% else %>
+                    <%= f.check_box("survey_id", {}, "hi", "hi") %>
+                <% end %>
+                 <%= f.label a.option %></p>
+            <% end %>
         <% end %>
-    <% end %>
+        <%= f.submit "Submit" %>
     <% end %>
 </body>
 </html>
