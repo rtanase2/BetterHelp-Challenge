@@ -4,6 +4,85 @@
     <title>"<%= @survey.name %>" Results</title>
 </head>
 <body>
-    <h1> "<%= @survey.name %>" Results</h1>
+    <h1> "<%= @survey.name %>" Results <a href = "/survey"><button>Back to All Surveys</button></a></h1>
+
+    <!-- Process submissions to get the data to display -->
+
+    <% female_responses = {}%>
+       <% male_responses = {} %>
+    <% for s in @submissions %>
+        <% gender = s.results["1"] %>
+        <% if gender == "Female" %>
+            <% s.results.each do |r| %>
+            <!-- Only process results that are not nil -->
+                <% if r[1] != nil %>
+                <!-- Count number of responses for each answer for question -->
+                    <% if female_responses[r[0]] == nil %>
+                        <% female_responses[r[0]] = {} %>
+                    <% end %>
+                    <% if r[1].is_a?(Array) %>
+                        <% r[1].each do |e| %>
+                            <% if female_responses[r[0]][e] == nil %>
+                                <% female_responses[r[0]][e] = 1 %>
+                            <% else %>
+                                <% female_responses[r[0]][e] += 1 %>
+                            <% end %>
+                        <% end %>
+                    <% else %>
+                        <% if female_responses[r[0]][r[1]] == nil %>
+                            <% female_responses[r[0]][r[1]] = 1 %>
+                        <% else %>
+                            <% female_responses[r[0]][r[1]] += 1 %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% elsif gender == "Male" %>
+            <% s.results.each do |r| %>
+            <!-- Only process results that are not nil -->
+                <% if r[1] != nil %>
+                <!-- Count number of responses for each answer for question -->
+                    <% if male_responses[r[0]] == nil %>
+                        <% male_responses[r[0]] = {} %>
+                    <% end %>
+                    <% if r[1].is_a?(Array) %>
+                        <% r[1].each do |e| %>
+                            <% if male_responses[r[0]][e] == nil %>
+                                <% male_responses[r[0]][e] = 1 %>
+                            <% else %>
+                                <% male_responses[r[0]][e] += 1 %>
+                            <% end %>
+                        <% end %>
+                    <% else %>
+                        <% if male_responses[r[0]][r[1]] == nil %>
+                            <% male_responses[r[0]][r[1]] = 1 %>
+                        <% else %>
+                            <% male_responses[r[0]][r[1]] += 1 %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+
+    <!-- Display data calculated above ignore r[0] == 1 because that is gender -->
+   <hr/>
+    <h2>Most Popular Answers for Females:</h2>
+    <% female_responses.each do |r| %>
+        <% if r[0] != "1" %>
+            <h3><%= Question.find(r[0].to_i).question %></h3>
+            <% max_val = r[1].max_by{|k, v| v} %>
+            <p><%= max_val[0] %></p>
+        <% end %>
+    <% end %>
+<hr/>
+    <h2>Most Popular Answers for Males:</h2>
+    <% male_responses.each do |r| %>
+        <% if r[0] != "1" %>
+            <h3><%= Question.find(r[0].to_i).question %></h3>
+             <% max_val = r[1].max_by{|k, v| v} %>
+            <p><%= max_val[0] %></p>
+        <% end %>
+    <% end %>
 </body>
 </html>

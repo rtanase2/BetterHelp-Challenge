@@ -1,6 +1,7 @@
 class SubmissionController < ApplicationController
    def index
         @survey = Survey.find(params[:survey_id])
+        @submissions = Submission.where(:survey_id => params[:survey_id])
    end
 
     def new
