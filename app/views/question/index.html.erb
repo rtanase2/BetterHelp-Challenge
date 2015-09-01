@@ -12,5 +12,6 @@
         <p><a href=<%= "/survey/" << params[:survey_id] << "/question/" << raw(q.id) << "/answer/" %>><button input="button">Edit answers</button></a></p>
         <%= button_to "Delete Question", {controller => :question, action: "destroy", id: raw(q.id)}, :method => :delete %>
     <% end %>
+</br>
 </body>
 </html>
