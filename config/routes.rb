@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'survey#new'
+  root 'survey#index'
   resources :survey do
     resources :question, only: [:index, :edit, :update] do
       resources :answer
