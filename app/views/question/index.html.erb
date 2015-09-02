@@ -7,7 +7,7 @@
     <h1>Edit Questions <a href=<%= "/survey/" << params[:survey_id] << "/question/new"%>><button input="button">Add New Question</button></a>
     <a href=<%= "/survey/" %>><button input="button">Back</button></a>
     <a href=<%= "/survey/" << params[:survey_id] << "/question/edit-pos"%>><button input="button">Edit Button Order</button></a></h1>
-    <% for q in @questions %>
+    <% for q in @questions.sort_by{|q| q.position} %>
         <p><%= q.position %>. <%= q.question %></p> 
         <p><a href=<%= "/survey/" << params[:survey_id] << "/question/" << raw(q.id) << "/edit" %>><button input="button">Edit Question</button></a> </p>
         <p><a href=<%= "/survey/" << params[:survey_id] << "/question/" << raw(q.id) << "/answer/" %>><button input="button">Edit Answers</button></a></p>

@@ -53,6 +53,9 @@ class QuestionController < ApplicationController
 
     def destroy
         @question = Question.find(params[:id])
+        for a in Answer.where(:question_id => @question.id)
+            a.destroy
+        end
         @question.destroy
         redirect_to "/survey/" << params[:survey_id] << "/question"
     end

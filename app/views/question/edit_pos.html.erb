@@ -9,10 +9,10 @@
     <p>Change the number next to the question to change the order of the questions.</p>
     <%= form_for :questions, :url =>  "/survey/" << params[:survey_id] << "/question/edit-pos", :html => {:method => :patch} do |f| %>
     <% total = @questions.count %>
-    <% for q in @questions %>
-    <p> <%= q.question %> </p>
+    <% for q in @questions.sort_by{|q| q.position} %>
+    <p> <%= q.question %> (Previous position: <%= q.position %>) </p>
     <%= f.fields_for :positions do |p| %>
-        <%= p.select(q.id, options_for_select(1..total))%>
+        <%= p.select(q.id, options_for_select(1..total, selected = q.position.to_s))%>
     <% end %>
     <% end %>
 
@@ -21,5 +21,7 @@
         </p>
 
     <% end %>
+
+    <a href=<%= "/survey/" << params[:survey_id] << "/question" %>><button>Back</button></a>
 </body>
 </html>
