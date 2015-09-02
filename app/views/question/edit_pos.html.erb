@@ -1,1 +1,22 @@
-lskdjfkl
+<!DOCTYPE html>
+<html>
+<head><title>Edit Question Positions</title></head>
+<body>
+    <h1>Edit Question Positions</h1>
+    <p>Change the number next to the question to change the order of the questions.</p>
+    <%= form_for :questions, :url =>  "/survey/" << params[:survey_id] << "/question/edit-pos", :html => {:method => :patch} do |f| %>
+    <% total = @questions.count %>
+    <% for q in @questions %>
+    <p> <%= q.question %> </p>
+    <%= f.fields_for :positions do |p| %>
+        <%= p.select(q.id, options_for_select(1..total))%>
+    <% end %>
+    <% end %>
+
+        <p>
+            <%= f.submit "Save Changes" %>
+        </p>
+
+    <% end %>
+</body>
+</html>

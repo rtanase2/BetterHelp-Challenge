@@ -1,6 +1,16 @@
 class QuestionController < ApplicationController
     def edit_pos
-        @question = Question.where(:survey_id => params[:survey_id])
+        @questions = Question.where(:survey_id => params[:survey_id])
+    end
+
+    def update_pos
+        @questions = Question.where(:survey_id => params[:survey_id])
+        positions = params[:questions][:positions]
+        for question in @questions 
+            question.update_attribute(:position, positions[question.id.to_s].to_i)
+            print question.position
+        end
+        redirect_to '/survey/' << params[:survey_id] << '/question'
     end
 
     def index
