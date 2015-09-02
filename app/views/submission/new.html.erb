@@ -4,7 +4,7 @@
     <title><%= @survey.name %></title>
 </head>
 <body>
-    <h1> <%= @survey.name %></h1>
+    <h1> <%= @survey.name %>  <a href="/survey"><button input="button">Back</button></a></h1>
     <%= form_for :submission, url: "/survey/" << params[:survey_id] << "/submission/" do |f| %>
         <% for q in @questions %>
             <h3><%= "#{raw(q.position)}. #{q.question}" %></h3>
