@@ -50,6 +50,11 @@ class AnswerController < ApplicationController
 
     def destroy
         @answer = Answer.find(params[:id])
+        for a in Answer.where(:question_id => params[:question_id])
+            if a.position > @answer.position
+                a.update_attribute(:position, a.position.to_i-1)
+            end
+        end
         @answer.destroy
         redirect_to "/survey/" << params[:survey_id] << "/question/" << params[:question_id] << "/answer"
     end
