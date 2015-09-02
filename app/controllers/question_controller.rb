@@ -10,7 +10,6 @@ class QuestionController < ApplicationController
         if Set[*positions.values].count == @questions.count
             for question in @questions 
                 question.update_attribute(:position, positions[question.id.to_s].to_i)
-                print question.position
             end
             redirect_to '/survey/' << params[:survey_id] << '/question'
         else
@@ -55,6 +54,11 @@ class QuestionController < ApplicationController
         @question = Question.find(params[:id])
         for a in Answer.where(:question_id => @question.id)
             a.destroy
+        end
+        for q in Question.where(:survey_id => params[:survey_id])
+            if q.position > @question.position
+                q.update_attribute(:position, q.position.to_i-1)
+            end
         end
         @question.destroy
         redirect_to "/survey/" << params[:survey_id] << "/question"
