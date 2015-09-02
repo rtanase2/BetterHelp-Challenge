@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     get '/question/edit-pos' => 'question#edit_pos'
     patch '/question/edit-pos' => 'question#update_pos'
     resources :question do
+      get '/answer/edit-pos' => 'answer#edit_pos'
+      patch '/answer/edit-pos' => 'answer#update_pos'
       resources :answer
     end
     resources :submission

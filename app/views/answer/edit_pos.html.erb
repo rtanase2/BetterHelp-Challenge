@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>Edit Answer Positions</title></head>
+<body>
+    <% if flash[:notice] %>
+        <h1 stye="color: red"> <%= flash[:notice] %></h1>
+    <% end %>
+    <h1>Edit Answer Positions</h1>
+    <p>Change the number next to the answer to change the order of the answers.</p>
+    <%= form_for :answers, :url =>  "/survey/" << params[:survey_id] << "/question/" << params[:question_id] <<"/answer/edit-pos", :html => {:method => :patch} do |f| %>
+    <% total = @answers.count %>
+    <% for a in @answers.sort_by{|a| a.position} %>
+    <p> <%= a.option %> (Previous position: <%= a.position %>) </p>
+    <%= f.fields_for :positions do |p| %>
+        <%= p.select(a.id, options_for_select(1..total, selected = a.position.to_s))%>
+    <% end %>
+    <% end %>
+
+        <p>
+            <%= f.submit "Save Changes" %>
+        </p>
+
+    <% end %>
+
+    <a href=<%= "/survey/" << params[:survey_id] << "/question/" << params[:question_id] << "/answer" %>><button>Back</button></a>
+</body>
+</html>

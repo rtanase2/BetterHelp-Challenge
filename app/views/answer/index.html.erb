@@ -5,9 +5,10 @@
 </head>
 <body>
     <h1>Answers for "<%= Question.find(raw(params[:question_id])).question %>"
-    <a href=<%= "/survey/" << params[:survey_id] << "/question/" << params[:question_id] << "/answer/new" %>><button input="button">Add New Answer</button></a>
+    <a href=<%= "/survey/" << params[:survey_id] << "/question/" << params[:question_id] << "/answer/new" %>><button input="button">Add New Answer</button></a> 
+    <a href=<%= "/survey/" << params[:survey_id] << "/question/" << params[:question_id] << "/answer/edit-pos" %>><button input="button">Edit Answer Order</button></a>
     <a href=<%= "/survey/" << params[:survey_id] << "/question" %>><button input="button">Back</button></a></h1>
-    <% for a in @answers %>
+    <% for a in @answers.sort_by{|a| a.position} %>
         <p><%= raw(a.position) << ". " << a.option %></p>
          <a href= <%= "/survey/" << raw(params[:survey_id]) << "/question/" << raw(params[:question_id]) << "/answer/" << raw(a.id) << "/edit" %>><button input="button"> Edit </button></a>  </br></br>
             <%= button_to "Delete Answer", {controller => :answer, action: "destroy", id: raw(a.id)}, :method => :delete %>
