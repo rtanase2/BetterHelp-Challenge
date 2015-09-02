@@ -1,15 +1,22 @@
 == Description
 
-Survey app built for BetterHelp's technical challenge. Allows user take a survey and display the most common answer per gender as well as allowing editting of questions and answers.
+Survey app built for BetterHelp's technical challenge. Allows user take a survey and display the most common answer per gender as well as allowing editting of questions and answers. Application is hosted at https://betterhelpchallenge.herokuapp.com/
 
 == Features
 
 * Adding questions
 * Deleting questions
 * Editing questions
+* Reorder questions
 * Adding answers
-* Deleting answers
+* Deleting answers)
 * Editing answers
+* Reorder answers
 * Displaying the questions and answers in a survey
 * Recording a submission of the survey
 * Showing statistics of submissions
+
+== How to Access Features
+* All editing (adding, deleting, updating) can be done by clicking edit on this page https://betterhelpchallenge.herokuapp.com/ and following the buttons to get to the desired feature
+* You can take the survey from https://betterhelpchallenge.herokuapp.com/ by clicking the Take Survey button
+* Statistics found https://betterhelpchallenge.herokuapp.com/survey/1/submission or after a submission
