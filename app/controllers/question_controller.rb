@@ -6,11 +6,17 @@ class QuestionController < ApplicationController
     def update_pos
         @questions = Question.where(:survey_id => params[:survey_id])
         positions = params[:questions][:positions]
-        for question in @questions 
-            question.update_attribute(:position, positions[question.id.to_s].to_i)
-            print question.position
+        # If each question has a unique position (2 pieces cannot have postion 1)
+        if Set[*positions.values].count == @questions.count
+            for question in @questions 
+                question.update_attribute(:position, positions[question.id.to_s].to_i)
+                print question.position
+            end
+            redirect_to '/survey/' << params[:survey_id] << '/question'
+        else
+            flash[:notice] = "Some questions had the same position. Make sure there is only one question per position."
+            redirect_to '/survey/' << params[:survey_id] << '/question/edit-pos'
         end
-        redirect_to '/survey/' << params[:survey_id] << '/question'
     end
 
     def index
