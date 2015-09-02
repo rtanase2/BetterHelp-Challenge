@@ -32,10 +32,15 @@ class AnswerController < ApplicationController
         @answer.position = Answer.where(:question_id => params[:question_id]).count + 1
         @answer.survey_id = params[:survey_id]
         @answer.question_id = params[:question_id]
-        if @answer.save
-            redirect_to '/survey/' << params[:survey_id] << "/question/" << params[:question_id] << "/answer"
+        if params[:answer][:option] == ""
+            flash[:notice] = "Must fill in option field"
+            redirect_to '/survey/' << params[:survey_id] << "/question/" << params[:question_id] << "/answer/new"
         else
-            render 'new'
+            if @answer.save
+                redirect_to '/survey/' << params[:survey_id] << "/question/" << params[:question_id] << "/answer"
+            else
+                render 'new'
+            end
         end
     end
 
