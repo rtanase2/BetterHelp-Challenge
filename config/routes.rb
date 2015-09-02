@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'survey#index'
   resources :survey do
+    get '/question/edit-pos' => 'question#edit_pos'
+    patch '/question/edit-pos' => 'question#update_pos'
     resources :question do
       resources :answer
     end

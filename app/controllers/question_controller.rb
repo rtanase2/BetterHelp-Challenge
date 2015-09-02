@@ -1,4 +1,8 @@
 class QuestionController < ApplicationController
+    def edit_pos
+        @question = Question.where(:survey_id => params[:survey_id])
+    end
+
     def index
         @questions = Question.where(:survey_id => params[:survey_id])
     end
