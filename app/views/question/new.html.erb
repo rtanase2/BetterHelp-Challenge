@@ -4,6 +4,7 @@
     <title>Add New Question</title>
 </head>
 <body>
+    <h1><%= flash[:notice] %></h1>
     <h1>Add New Question <a href= <%= "/survey/" << params[:survey_id] << "/question" %>><button input="button">Back</button></a></h1>
     <%= form_for :question, :url =>  "/survey/" << params[:survey_id] << "/question/" do |f| %>
         <p>
@@ -18,7 +19,7 @@
             <%= label_tag(:type_input, "Check Boxes") %>
         </p>
 
-        <%= f.submit "Add Question!" %>
+        <%= f.submit "Add Question" %>
     <% end %>
 </body>
 </html>

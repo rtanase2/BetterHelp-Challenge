@@ -32,12 +32,17 @@ class QuestionController < ApplicationController
 
     def create
         @question = Question.new(question_params)
-        @question.survey_id = params[:survey_id]
-        @question.position = Question.where(:survey_id => params[:survey_id]).count + 1
-        if @question.save
-            redirect_to '/survey/' << params[:survey_id] <<'/question'
+        if params[:type_input] == nil or params[:question][:question] == ""
+            flash[:notice] = "You need to fill in both fields"
+            redirect_to '/survey/' << params[:survey_id] << '/question/new'
         else
-            render 'new'
+            @question.survey_id = params[:survey_id]
+            @question.position = Question.where(:survey_id => params[:survey_id]).count + 1
+            if @question.save
+                redirect_to '/survey/' << params[:survey_id] <<'/question'
+            else
+                render 'new'
+            end
         end
     end
 
