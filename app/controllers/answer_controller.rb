@@ -1,4 +1,24 @@
 class AnswerController < ApplicationController
+    def edit_pos
+        @answers = Answer.where(:question_id => params[:question_id])
+    end
+
+    def update_pos
+        @answers = Answer.where(:question_id => params[:question_id])
+        positions = params[:answers][:positions]
+        print positions
+        # If each answer has a unique position (2 pieces cannot have postion 1)
+        if Set[*positions.values].count == @answers.count
+            for answer in @answers 
+                answer.update_attribute(:position, positions[answer.id.to_s].to_i)
+            end
+            redirect_to '/survey/' << params[:survey_id] << '/question/' << params[:question_id] << "/answer"
+        else
+            flash[:notice] = "Some answers had the same position. Make sure there is only one answer per position."
+            redirect_to '/survey/' << params[:survey_id] << "/question/" << params[:question_id] << '/answer/edit-pos'
+        end
+    end
+
     def index
         @answers = Answer.where(:question_id => params[:question_id])
     end
@@ -30,6 +50,11 @@ class AnswerController < ApplicationController
 
     def destroy
         @answer = Answer.find(params[:id])
+        for a in Answer.where(:question_id => params[:question_id])
+            if a.position > @answer.position
+                a.update_attribute(:position, a.position.to_i-1)
+            end
+        end
         @answer.destroy
         redirect_to "/survey/" << params[:survey_id] << "/question/" << params[:question_id] << "/answer"
     end
