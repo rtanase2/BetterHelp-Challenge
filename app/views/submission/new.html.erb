@@ -6,9 +6,9 @@
 <body>
     <h1> <%= @survey.name %>  <a href="/survey"><button input="button">Back</button></a></h1>
     <%= form_for :submission, url: "/survey/" << params[:survey_id] << "/submission/" do |f| %>
-        <% for q in @questions %>
+        <% for q in @questions.sort_by{|q| q.position} %>
             <h3><%= "#{raw(q.position)}. #{q.question}" %></h3>
-            <% for a in @answers.where(:question_id => q.id) %>
+            <% for a in @answers.where(:question_id => q.id).sort_by{|a| a.position} %>
             <%= f.fields_for :results do |r| %>
                 <p>
                 <% if q.input_type == "radio" %>
